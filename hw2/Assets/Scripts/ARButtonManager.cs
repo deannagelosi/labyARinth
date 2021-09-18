@@ -6,21 +6,21 @@ using cs294_137.hw2;
 public class ARButtonManager : MonoBehaviour
 {
     private Camera arCamera;
-    private PlaceGameBoard placeGameBoard;
+    private PlaceLabyrinthBoard placeLabyrinthBoard;
 
     void Start()
     {
         // Here we will grab the AR camera 
         // This camera acts like any other camera in Unity.
         arCamera = FindObjectOfType<ARCamera>().GetComponent<Camera>();
-        // We will also need the PlaceGameBoard script to know if
-        // the game board exists or not.
-        placeGameBoard = GetComponent<PlaceGameBoard>();
+        // We will also need the PlaceLabyrinthBoard script to know if
+        // the Labyrinth board exists or not.
+        placeLabyrinthBoard = GetComponent<PlaceLabyrinthBoard>();
     }
 
     void Update()
     {
-        if (placeGameBoard.Placed() && Input.GetMouseButtonDown(0))
+        if (placeLabyrinthBoard.Placed() && Input.GetMouseButtonDown(0))
         {
             Vector2 touchPosition = Input.mousePosition;
             // Convert the 2d screen point into a ray.

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
     public GameObject loseTextObject;
     public GameObject winTextObject;
+    public GameObject scoreTextObject;
+    // public TextMeshProUGUI scoreTextObject;
 
     private Vector3 startPosition;
     private Rigidbody rb;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
         setPosition();
         loseTextObject.SetActive(false);
         winTextObject.SetActive(false);
+        scoreTextObject.SetActive(false);
 
         // Set the initial score to zero
         lastScore = 0;
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         loseTextObject.SetActive(false);
         winTextObject.SetActive(false);
+        scoreTextObject.SetActive(false);
 
     }
 
@@ -85,6 +90,9 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         print("Score: " + lastScore.ToString());
+        scoreTextObject.GetComponent<TextMeshProUGUI>().text = "Score: " + lastScore.ToString();
+        // scoreTextObject.text = "Score: " + lastScore.ToString();
+        scoreTextObject.SetActive(true);
         // something here about only changing the score when the ball goes through the hole or reaches the end
         // does not display otherwise
         // score.Text = "Score: " + score.ToString();

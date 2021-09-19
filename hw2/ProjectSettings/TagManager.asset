@@ -11,6 +11,7 @@ TagManager:
   - SimObj
   - StandingLiquid
   - Interactable
+  - Loser
   layers:
   - Default
   - TransparentFX

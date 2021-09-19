@@ -12,6 +12,7 @@ public class PlaceLabyrinthBoard : MonoBehaviour
     // These will store references to our other components.
     private ARRaycastManager raycastManager;
     private ARPlaneManager planeManager;
+    private PlayerController playerController;
     // This will indicate whether the labyrinth board is set.
     private bool placed = false;
 
@@ -24,6 +25,9 @@ public class PlaceLabyrinthBoard : MonoBehaviour
 
         //We want to place our board only on hortizontal planes. So we tell the plane manager only to detect those
         planeManager.detectionMode = PlaneDetectionMode.Horizontal;
+
+        GameObject playerObject = GameObject.Find("Player");
+        playerController = playerObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame.
@@ -46,8 +50,10 @@ public class PlaceLabyrinthBoard : MonoBehaviour
                     var hitPosition = hits[0].hitPosition;
                     // Now we will activate our labyrinth board and place it at the
                     // chosen location.
+                    playerController.resetPlayer();
                     labyrinthBoard.SetActive(true);
                     labyrinthBoard.transform.position = hitPosition;
+                    playerController.setPosition();
                     placed = true;
                     // After we have placed the labyrinth board we will disable the
                     // planes in the scene as we no longer need them.

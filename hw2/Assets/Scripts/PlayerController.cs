@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         setPosition();
         loseTextObject.SetActive(false);
+        winTextObject.SetActive(false);
     }
 
     public void setPosition()
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = startPosition;
         loseTextObject.SetActive(false);
+        winTextObject.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -53,6 +56,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Loser")) 
         {
             loseTextObject.SetActive(true);
+        }
+
+        else if (other.gameObject.CompareTag("Winner")) 
+        {
+            winTextObject.SetActive(true);
         }
     }
 }

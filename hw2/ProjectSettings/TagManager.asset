@@ -12,6 +12,7 @@ TagManager:
   - StandingLiquid
   - Interactable
   - Loser
+  - Winner
   layers:
   - Default
   - TransparentFX

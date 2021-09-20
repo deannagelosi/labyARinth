@@ -5,3 +5,5 @@ This AR game is based on the tabletop marble game. In this Unity game, the playe
 The game board 3D model was made in Fusion 360 and the floor plan texture design was made in Adobe Illustrator.
 
 [YouTube video](https://www.youtube.com/watch?v=z4ViqRukPFQ)
+
+![labyrinth game in Unity](img/labyARinth.png)

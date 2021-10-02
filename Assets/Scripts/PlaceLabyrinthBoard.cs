@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //This allows us to user the AR Foundation simulator functions
-using cs294_137.hw2;
+// using cs294_137.hw2;
+using UnityEngine.XR.ARFoundation; //TO_ADD
+using UnityEngine.XR.ARSubsystems;
 public class PlaceLabyrinthBoard : MonoBehaviour
 {
     // Public variables can be set from the unity UI.
@@ -42,12 +44,15 @@ public class PlaceLabyrinthBoard : MonoBehaviour
                 // Raycast will return a list of all planes intersected by the
                 // ray as well as the intersection point.
                 List<ARRaycastHit> hits = new List<ARRaycastHit>();
-                if (raycastManager.Raycast(
-                    touchPosition, ref hits, TrackableType.PlaneWithinPolygon))
+                // if (raycastManager.Raycast(
+                //     touchPosition, ref hits, TrackableType.PlaneWithinPolygon))
+                if (raycastManager.Raycast(//TO_ADD
+                    touchPosition, hits, TrackableType.PlaneWithinPolygon)) //TO_ADD
                 {
                     // The list is sorted by distance so to get the location
                     // of the closest intersection we simply reference hits[0].
-                    var hitPosition = hits[0].hitPosition;
+                    // var hitPosition = hits[0].hitPosition;
+                    var hitPosition = hits[0].pose.position; //TO_ADD
                     // Now we will activate our labyrinth board and place it at the
                     // chosen location.
                     playerController.resetPlayer();

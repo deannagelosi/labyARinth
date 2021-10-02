@@ -6,11 +6,11 @@ using UnityEngine;
 // using cs294_137.hw2;
 using UnityEngine.XR.ARFoundation; //TO_ADD
 using UnityEngine.XR.ARSubsystems;
-public class PlaceLabyrinthBoard : MonoBehaviour
+public class PlaceGameBoard : MonoBehaviour
 {
     // Public variables can be set from the unity UI.
     // We will set this to our Labyrinth Board object.
-    public GameObject labyrinthBoard;
+    public GameObject gameBoard;
     // These will store references to our other components.
     private ARRaycastManager raycastManager;
     private ARPlaneManager planeManager;
@@ -37,9 +37,11 @@ public class PlaceLabyrinthBoard : MonoBehaviour
     {
         if (!placed)
         {
-            if (Input.GetMouseButtonDown(0))
+            // if (Input.GetMouseButtonDown(0))
+            if (Input.touchCount > 0)
             {
-                Vector2 touchPosition = Input.mousePosition;
+                // Vector2 touchPosition = Input.mousePosition;
+                Vector2 touchPosition = Input.GetTouch(0).position;
 
                 // Raycast will return a list of all planes intersected by the
                 // ray as well as the intersection point.
@@ -56,8 +58,8 @@ public class PlaceLabyrinthBoard : MonoBehaviour
                     // Now we will activate our labyrinth board and place it at the
                     // chosen location.
                     playerController.resetPlayer();
-                    labyrinthBoard.SetActive(true);
-                    labyrinthBoard.transform.position = hitPosition;
+                    gameBoard.SetActive(true);
+                    gameBoard.transform.position = hitPosition;
                     playerController.setPosition();
                     placed = true;
                     // After we have placed the labyrinth board we will disable the
@@ -79,7 +81,7 @@ public class PlaceLabyrinthBoard : MonoBehaviour
 
     // If the user places the labyrinth board at an undesirable location we 
     // would like to allow the user to move the labyrinth board to a new location.
-    public void AllowMoveLabyrinthBoard()
+    public void AllowMoveGameBoard()
     {
         placed = false;
         //planeManager.SetTrackablesActive(true);

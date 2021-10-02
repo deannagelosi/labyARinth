@@ -8,7 +8,7 @@ using UnityEngine.XR.ARSubsystems;
 public class ARButtonManager : MonoBehaviour
 {
     private Camera arCamera;
-    private PlaceLabyrinthBoard placeLabyrinthBoard;
+    private PlaceGameBoard placeGameBoard;
 
     void Start()
     {
@@ -18,13 +18,13 @@ public class ARButtonManager : MonoBehaviour
         arCamera = GetComponent<ARSessionOrigin>().camera; //TO_ADD
         // We will also need the PlaceLabyrinthBoard script to know if
         // the Labyrinth board exists or not.
-        placeLabyrinthBoard = GetComponent<PlaceLabyrinthBoard>();
+        placeGameBoard = GetComponent<PlaceGameBoard>();
     }
 
     void Update()
     {
         // if (placeLabyrinthBoard.Placed() && Input.GetMouseButtonDown(0))
-        if (placeLabyrinthBoard.Placed() && Input.touchCount > 0) //TO_ADD
+        if (placeGameBoard.Placed() && Input.touchCount > 0) //TO_ADD
         {
             // Vector2 touchPosition = Input.mousePosition;
             Vector2 touchPosition = Input.GetTouch(0).position; //TO_ADD

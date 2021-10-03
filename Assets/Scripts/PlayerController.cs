@@ -37,19 +37,22 @@ public class PlayerController : MonoBehaviour
         startPosition = transform.position;
     }
 
-    void OnMove(InputValue movementValue) 
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
+    // void OnMove(InputValue movementValue) 
+    // {
+    //     Vector2 movementVector = movementValue.Get<Vector2>();
 
-        movementX = movementVector.x;
-        movementY = movementVector.y;
-    }
+    //     movementX = movementVector.x;
+    //     movementY = movementVector.y;
+    // }
 
     void FixedUpdate() 
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        // Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         
-        rb.AddForce(movement * speed);
+        // rb.AddForce(movement * speed);
+
+        Vector3 acc = Input.acceleration;
+        rb.AddForce(acc.x * speed, 0, acc.y * speed);
     }
 
     public void resetPlayer() 

@@ -863,8 +863,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 633037981}
-  - component: {fileID: 633037980}
-  - component: {fileID: 633037979}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -872,30 +870,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &633037979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633037978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14997b05e11969e459cf27f4706736a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &633037980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633037978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481550386a76f1142a39f09a4e6e6ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &633037981
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,7 +1303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 3364715923234915347, guid: 4f957aeaf8cb64bcea9ff152ab379988, type: 3}
-  m_DetectionMode: -1
+  m_DetectionMode: 1
 --- !u!114 &966072844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,7 +2120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0573dd400574457b4e92271b86bc56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 3
   loseTextObject: {fileID: 187344564}
   winTextObject: {fileID: 1429700491}
   scoreTextObject: {fileID: 1039496599}

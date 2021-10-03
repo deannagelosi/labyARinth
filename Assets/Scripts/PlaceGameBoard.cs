@@ -1,11 +1,10 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //This allows us to user the AR Foundation simulator functions
-// using cs294_137.hw2;
-using UnityEngine.XR.ARFoundation; //TO_ADD
+using UnityEngine.XR.ARFoundation; 
 using UnityEngine.XR.ARSubsystems;
+
 public class PlaceGameBoard : MonoBehaviour
 {
     // Public variables can be set from the unity UI.
@@ -25,11 +24,16 @@ public class PlaceGameBoard : MonoBehaviour
         raycastManager = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
 
-        //We want to place our board only on hortizontal planes. So we tell the plane manager only to detect those
-        planeManager.detectionMode = PlaneDetectionMode.Horizontal;
-
+        // Find the player object
         GameObject playerObject = GameObject.Find("Player");
         playerController = playerObject.GetComponent<PlayerController>();
+        playerController.setPosition(); // Save players initial position
+
+        // start with game turned off after finding Player
+        gameBoard.SetActive(false);
+
+        // Turn on horizontal plane detection
+        planeManager.detectionMode = PlaneDetectionMode.Horizontal;
     }
 
     // Update is called once per frame.
@@ -46,46 +50,55 @@ public class PlaceGameBoard : MonoBehaviour
                 // Raycast will return a list of all planes intersected by the
                 // ray as well as the intersection point.
                 List<ARRaycastHit> hits = new List<ARRaycastHit>();
-                // if (raycastManager.Raycast(
-                //     touchPosition, ref hits, TrackableType.PlaneWithinPolygon))
-                if (raycastManager.Raycast(//TO_ADD
-                    touchPosition, hits, TrackableType.PlaneWithinPolygon)) //TO_ADD
-                {
-                    // The list is sorted by distance so to get the location
-                    // of the closest intersection we simply reference hits[0].
-                    // var hitPosition = hits[0].hitPosition;
-                    var hitPosition = hits[0].pose.position; //TO_ADD
-                    // Now we will activate our labyrinth board and place it at the
-                    // chosen location.
-                    playerController.resetPlayer();
-                    gameBoard.SetActive(true);
-                    gameBoard.transform.position = hitPosition;
-                    playerController.setPosition();
-                    placed = true;
-                    // After we have placed the labyrinth board we will disable the
-                    // planes in the scene as we no longer need them.
-                    
-                    planeManager.detectionMode = PlaneDetectionMode.None;
 
+                if (raycastManager.Raycast(
+                    touchPosition, hits, TrackableType.PlaneWithinPolygon)) 
+                {
+                    var hitPosition = hits[0].pose.position; 
+
+                    // Activate labyrinth board and place at chosen location
+                    gameBoard.SetActive(true);
+                    playerController.resetPlayer(); // player in starting position
+                    gameBoard.transform.position = hitPosition;
+                    playerController.setPosition(); // get new starting position
+                    placed = true;
+
+                    // After placed, disable plane detection and hide found planes
+                    planeManager.detectionMode = PlaneDetectionMode.None; // pause detection
+                    // planeManager.enabled = !planeManager.enabled;
+                    SetAllPlanesActive(false);
                 }
             }
         }
-        else
+        else // board is already placed
         {
-            // The plane manager will set all detected planes to active by 
-            // default so we will continue to disable these.
-            //planeManager.SetTrackablesActive(false); //For older versions of AR foundation
+            // make sure plane detection is off
             planeManager.detectionMode = PlaneDetectionMode.None;
+            SetAllPlanesActive(false);
         }
     }
 
-    // If the user places the labyrinth board at an undesirable location we 
-    // would like to allow the user to move the labyrinth board to a new location.
+    // Allow the player to move the board to a new location
     public void AllowMoveGameBoard()
     {
-        placed = false;
-        //planeManager.SetTrackablesActive(true);
+        // Reset player and Disable board
+        playerController.resetPlayer(); // back to starting position
+        gameBoard.SetActive(false);
+
+        // Turn plane detection back on and show old planes
         planeManager.detectionMode = PlaneDetectionMode.Horizontal;
+        SetAllPlanesActive(true);
+        
+        // Turn touch detection back on
+        placed = false;
+    }
+
+    private void SetAllPlanesActive(bool value)
+    {
+        foreach(var plane in planeManager.trackables)
+        {
+            plane.gameObject.SetActive(value);
+        }
     }
 
     // Lastly we will later need to allow other components to check whether the

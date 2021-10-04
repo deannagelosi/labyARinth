@@ -28,6 +28,7 @@ public class PlaceGameBoard : MonoBehaviour
         GameObject playerObject = GameObject.Find("Player");
         playerController = playerObject.GetComponent<PlayerController>();
         playerController.setPosition(); // Save players initial position
+        playerController.deactivateText(); // Hide win/lose text;
 
         // start with game turned off after finding Player
         gameBoard.SetActive(false);

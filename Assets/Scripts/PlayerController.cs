@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject loseTextObject;
     public GameObject winTextObject;
     public GameObject scoreTextObject;
-    // public TextMeshProUGUI scoreTextObject;
+    public GameObject bonusScoreTextObject;
 
     private Vector3 startPosition;
     private Rigidbody rb;
@@ -18,18 +18,29 @@ public class PlayerController : MonoBehaviour
     private float movementY;
 
     private int lastScore;
+    private int bonusCount;
     
     // Start is called before the first frame update
     void Start()
     {
+        print("player controller start");
+
         rb = GetComponent<Rigidbody>();
         setPosition();
-        loseTextObject.SetActive(false);
-        winTextObject.SetActive(false);
-        scoreTextObject.SetActive(false);
+        
+        deactivateText();
 
         // Set the initial score to zero
         lastScore = 0;
+        bonusCount = 0;
+    }
+
+    public void deactivateText() 
+    {
+        loseTextObject.SetActive(false);
+        winTextObject.SetActive(false);
+        scoreTextObject.SetActive(false);
+        bonusScoreTextObject.SetActive(false);
     }
 
     public void setPosition()
@@ -58,9 +69,7 @@ public class PlayerController : MonoBehaviour
     public void resetPlayer() 
     {
         transform.position = startPosition;
-        loseTextObject.SetActive(false);
-        winTextObject.SetActive(false);
-        scoreTextObject.SetActive(false);
+         deactivateText();
 
     }
 
@@ -70,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             loseTextObject.SetActive(true);
             SetScoreText();
+            bonusCount = 0;
         }
 
         else if (other.gameObject.CompareTag("Winner")) 
@@ -77,12 +87,21 @@ public class PlayerController : MonoBehaviour
             winTextObject.SetActive(true);
             lastScore = 18; // Score for reaching the end
             SetScoreText();
+            bonusCount = 0;
         }
 
         else if (other.gameObject.CompareTag("Detector"))
         {
             Detector detectorController = other.gameObject.GetComponent<Detector>();
             lastScore = detectorController.getScore();
+        }
+
+        else if (other.gameObject.CompareTag("PickUp"))
+        {
+            print("touched the pickup");
+            other.gameObject.SetActive(false);
+            bonusCount = bonusCount + 1;
+            SetBonusScoreText();
         }
    
         // if the ball enters one of the holes, it's encountering a collider
@@ -100,5 +119,11 @@ public class PlayerController : MonoBehaviour
         // does not display otherwise
         // score.Text = "Score: " + score.ToString();
 
+    }
+
+    void SetBonusScoreText()
+    {
+        bonusScoreTextObject.GetComponent<TextMeshProUGUI>().text = "Bonus Score: " + bonusCount.ToString();
+        bonusScoreTextObject.SetActive(true);
     }
 }

@@ -1562,6 +1562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBoard: {fileID: 1016105528}
+  pickUpParent: {fileID: 1909898090}
 --- !u!114 &966072845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,6 +1588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0542adeb16924a81b1fff7b4b94a4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpParent: {fileID: 1909898090}
 --- !u!114 &966072847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,7 +1602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: 6e0642273f36640b8a1fb629f8cffa02, type: 2}
-  m_MaxNumberOfMovingImages: 1
+  m_MaxNumberOfMovingImages: 4
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!1001 &1016105510
 PrefabInstance:

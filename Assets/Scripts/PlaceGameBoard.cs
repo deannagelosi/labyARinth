@@ -10,6 +10,8 @@ public class PlaceGameBoard : MonoBehaviour
     // Public variables can be set from the unity UI.
     // We will set this to our Labyrinth Board object.
     public GameObject gameBoard;
+    public GameObject pickUpParent;
+
     // These will store references to our other components.
     private ARRaycastManager raycastManager;
     private ARPlaneManager planeManager;
@@ -33,6 +35,7 @@ public class PlaceGameBoard : MonoBehaviour
 
         // start with game turned off after finding Player
         gameBoard.SetActive(false);
+        pickUpParent.SetActive(false);
 
         // Turn on horizontal plane detection
         planeManager.detectionMode = PlaneDetectionMode.Horizontal;
@@ -90,15 +93,14 @@ public class PlaceGameBoard : MonoBehaviour
         // Reset player and Disable board
         playerController.resetPlayer(); // back to starting position
         gameBoard.SetActive(false);
+        pickUpParent.SetActive(false);
 
         // Turn plane detection back on and show old planes
         planeManager.detectionMode = PlaneDetectionMode.Horizontal;
         SetAllPlanesActive(true);
         
         // Turn touch detection back on
-        
         placed = false;
-
     }
 
     private void SetAllPlanesActive(bool value)

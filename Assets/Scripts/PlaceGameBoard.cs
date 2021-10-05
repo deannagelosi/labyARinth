@@ -16,6 +16,7 @@ public class PlaceGameBoard : MonoBehaviour
     private PlayerController playerController;
     // This will indicate whether the labyrinth board is set.
     private bool placed = false;
+    private int frameWait;
 
     // Start is called before the first frame update.
     void Start()
@@ -35,6 +36,8 @@ public class PlaceGameBoard : MonoBehaviour
 
         // Turn on horizontal plane detection
         planeManager.detectionMode = PlaneDetectionMode.Horizontal;
+
+        frameWait = 0;
     }
 
     // Update is called once per frame.
@@ -42,8 +45,9 @@ public class PlaceGameBoard : MonoBehaviour
     {
         if (!placed)
         {
+            frameWait += 1;
             // if (Input.GetMouseButtonDown(0))
-            if (Input.touchCount > 0)
+            if (Input.touchCount > 0 && frameWait > 5) 
             {
                 // Vector2 touchPosition = Input.mousePosition;
                 Vector2 touchPosition = Input.GetTouch(0).position;
@@ -63,6 +67,7 @@ public class PlaceGameBoard : MonoBehaviour
                     gameBoard.transform.position = hitPosition;
                     playerController.setPosition(); // get new starting position
                     placed = true;
+                    frameWait = 0;
 
                     // After placed, disable plane detection and hide found planes
                     planeManager.detectionMode = PlaneDetectionMode.None; // pause detection
@@ -91,7 +96,9 @@ public class PlaceGameBoard : MonoBehaviour
         SetAllPlanesActive(true);
         
         // Turn touch detection back on
+        
         placed = false;
+
     }
 
     private void SetAllPlanesActive(bool value)

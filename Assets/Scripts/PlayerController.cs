@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject winTextObject;
     public GameObject scoreTextObject;
     public GameObject bonusScoreTextObject;
+    public GameObject[] deactivatedPickUps; 
 
     private Vector3 startPosition;
     private Rigidbody rb;
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private float movementY;
 
     private int lastScore;
-    private int bonusCount;
+    private int bonusCount;  
     
     // Start is called before the first frame update
     void Start()
@@ -69,8 +70,12 @@ public class PlayerController : MonoBehaviour
     public void resetPlayer() 
     {
         transform.position = startPosition;
-         deactivateText();
-
+        deactivateText();
+        // add resetting collectibles 
+        foreach (GameObject PickUp in deactivatedPickUps)
+        {
+            PickUp.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other) 
@@ -78,7 +83,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Loser")) 
         {
             loseTextObject.SetActive(true);
-            SetScoreText();
+            SetPointText(scoreTextObject, "Score: " + lastScore.ToString());
             bonusCount = 0;
         }
 
@@ -86,7 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             winTextObject.SetActive(true);
             lastScore = 18; // Score for reaching the end
-            SetScoreText();
+            SetPointText(scoreTextObject, "Score: " + lastScore.ToString());
             bonusCount = 0;
         }
 
@@ -100,8 +105,8 @@ public class PlayerController : MonoBehaviour
         {
             print("touched the pickup");
             other.gameObject.SetActive(false);
-            bonusCount = bonusCount + 1;
-            SetBonusScoreText();
+            bonusCount += 1;
+            SetPointText(bonusScoreTextObject, "Bonus Score: " + bonusCount.ToString());
         }
    
         // if the ball enters one of the holes, it's encountering a collider
@@ -109,21 +114,9 @@ public class PlayerController : MonoBehaviour
         // when the ball goes through a hole, it changes its score from nothing to the value
     }
 
-    void SetScoreText()
+    void SetPointText(GameObject pointTextObject, string text)
     {
-        print("Score: " + lastScore.ToString());
-        scoreTextObject.GetComponent<TextMeshProUGUI>().text = "Score: " + lastScore.ToString();
-        // scoreTextObject.text = "Score: " + lastScore.ToString();
-        scoreTextObject.SetActive(true);
-        // something here about only changing the score when the ball goes through the hole or reaches the end
-        // does not display otherwise
-        // score.Text = "Score: " + score.ToString();
-
-    }
-
-    void SetBonusScoreText()
-    {
-        bonusScoreTextObject.GetComponent<TextMeshProUGUI>().text = "Bonus Score: " + bonusCount.ToString();
-        bonusScoreTextObject.SetActive(true);
+        pointTextObject.GetComponent<TextMeshProUGUI>().text = text;
+        pointTextObject.SetActive(true);
     }
 }

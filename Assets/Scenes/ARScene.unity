@@ -400,6 +400,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6383013028600120948, guid: edced09f7515d470a8305a7b81fb21ff, type: 3}
   m_PrefabInstance: {fileID: 150602436}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &165585583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4950058774738644797, guid: 669852485690e4eb7bff05cc4f89cd62, type: 3}
+  m_PrefabInstance: {fileID: 325171623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &170851182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,6 +613,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &223974226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4950058774738644797, guid: 669852485690e4eb7bff05cc4f89cd62, type: 3}
+  m_PrefabInstance: {fileID: 1868167878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &251706995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1043,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &633987594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4950058774738644797, guid: 669852485690e4eb7bff05cc4f89cd62, type: 3}
+  m_PrefabInstance: {fileID: 733506671}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,6 +1348,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756886072}
   m_CullTransparentMesh: 1
+--- !u!1 &854905462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4950058774738644797, guid: 669852485690e4eb7bff05cc4f89cd62, type: 3}
+  m_PrefabInstance: {fileID: 1549309939884318483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &855308964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2171,6 +2191,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110325181}
   m_CullTransparentMesh: 1
+--- !u!1 &1114040580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4950058774738644797, guid: 669852485690e4eb7bff05cc4f89cd62, type: 3}
+  m_PrefabInstance: {fileID: 170851182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1156092910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2511,6 +2536,12 @@ MonoBehaviour:
   winTextObject: {fileID: 1429700491}
   scoreTextObject: {fileID: 1039496599}
   bonusScoreTextObject: {fileID: 1110325181}
+  deactivatedPickUps:
+  - {fileID: 854905462}
+  - {fileID: 633987594}
+  - {fileID: 165585583}
+  - {fileID: 1114040580}
+  - {fileID: 223974226}
 --- !u!114 &1344106871
 MonoBehaviour:
   m_ObjectHideFlags: 0

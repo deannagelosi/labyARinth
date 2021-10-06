@@ -8,4 +8,4 @@ The game board 3D model was made in Fusion 360 and the floor plan texture design
 
 [YouTube video](https://youtu.be/ISBj4lPbRQo)
 
-![labyrinth game in Unity](img/hero-image.png)
+![labyrinth game in Unity](img/image-tracking.png)
